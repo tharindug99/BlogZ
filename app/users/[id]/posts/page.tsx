@@ -1,6 +1,5 @@
 import React from 'react';
 import PostsByUser from '@/components/PostsByUser';
-import { useParams } from 'react-router-dom';
 function Posts() {
   
 

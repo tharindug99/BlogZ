@@ -52,10 +52,10 @@ function Header() {
               <Link href="/">Home</Link>
             </li>
             <li className="text-black hover:text-gray-300">
-              <Link href="/about">About</Link>
+              <Link href="/blogs">Blogs</Link>
             </li>
             <li className="text-black hover:text-gray-300">
-              <Link href="/contact">Contact</Link>
+              <Link href="/users">Users</Link>
             </li>
           </ul>
         </nav>

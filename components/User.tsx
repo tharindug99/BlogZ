@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { useParams } from 'next/navigation';
-import useFetchUser from '@/hooks/fetchUser';
+import useFetchUser from '@/hooks/usefetchUser';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
@@ -11,7 +11,11 @@ function UserDetail() {
     
     
     const params = useParams();
-    const userId = Number(params?.id);
+    console.log(params.id);
+    console.log("hii");
+
+
+    const userId = params.id;
     const { user, loading, error } = useFetchUser(userId);
 
     if (loading) {
@@ -19,13 +23,11 @@ function UserDetail() {
                     <Loading/>
                 </div>;
     }
-
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div>Error:{error}</div>;
     }
-
     if (!user) {
-        return <div>No user found</div>;
+        return <div>No users found</div>;
     }
 
     return (
@@ -73,7 +75,7 @@ function UserDetail() {
             </div>
 
             <div className="bg-white shadow-md w-4/5 my-2 rounded-lg p-4 flex">
-                <Link href={`/users/${user.id}/posts`} className="block w-full">
+                <Link href={`/users/${userId}/posts`} className="block w-full">
                     <Button 
                     variant="default"
                     className="w-full"

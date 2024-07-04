@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import {users} from '@/lib/data'
-
-const USERS_URL = users;
+import UserModel from '@/app/models/user'; 
+import DatabaseConnection from '@/lib/mongo/db';
 
 export async function GET(req: Request) {
     const url = new URL(req.url);
@@ -11,22 +10,21 @@ export async function GET(req: Request) {
         return NextResponse.json({ message: 'User ID is required' }, { status: 400 });
     }
 
+    let client;
     try {
-        const response = await fetch(USERS_URL);
+        client = await DatabaseConnection();
+        console.log('Database connected successfully !!!');
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch users: ${response.statusText}`);
-        }
-
-        const users = await response.json();
-        const user = users.find((user: { id: number }) => user.id === parseInt(id, 10));
+        const user = await UserModel.findById(id);
+        console.log("This is " + id);
 
         if (user) {
             return NextResponse.json(user);
         } else {
             return NextResponse.json({ message: 'User not found' }, { status: 404 });
         }
-    } catch (error) {
-        return NextResponse.json({ error: error }, { status: 500 });
+    } catch (error: any) {
+        console.warn('Error connecting DB', error);
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

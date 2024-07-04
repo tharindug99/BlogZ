@@ -18,6 +18,7 @@ interface Company {
 }
 
 interface User {
+    _id: any;
     id: number;
     name: string;
     username: string;
@@ -61,7 +62,7 @@ const useFetchUser = (id: number | null): UseFetchUserResult => {
             }
         };
 
-        fetchUser();
+       fetchUser();
     }, [id]);
 
     return { user, loading, error };

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useFetchUserPosts from '@/hooks/fetchUserPosts';
-import useFetchUser from '@/hooks/fetchUser';
+import useFetchUser from '@/hooks/usefetchUser';
 import { useParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import Loading from './Loading';

@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../app/public/logo.png'
 import Image from 'next/image';
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -10,7 +10,7 @@ function Footer() {
         <div className="flex flex-wrap justify-between">
           {/* Logo and Social Media */}
           <div className="w-full md:w-1/4 mb-8 md:mb-0">
-            <Image src={Logo} className='h-15 w-14' alt='logo'/>
+            <Image src={Logo} className='h-50 w-60' alt='logo'/>
             <div className="flex space-x-4 mt-12">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
               <FaFacebook size={30} className="text-black hover:text-gray-400" />
@@ -23,6 +23,12 @@ function Footer() {
               </a>
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
               <FaTwitter size={30} className="text-black hover:text-gray-400" />
+              </a>
+              <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+              <FaTiktok size={30} className="text-black hover:text-gray-400" />
+              </a>
+              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+              <FaYoutube size={30} className="text-black hover:text-gray-400" />
               </a>
             </div>
           </div>

@@ -11,11 +11,9 @@ function UserDetail() {
     
     
     const params = useParams();
-    console.log(params.id);
-    console.log("hii");
-
-
-    const userId = params.id;
+    
+    const userId = params.id as unknown as number | null;
+    
     const { user, loading, error } = useFetchUser(userId);
 
     if (loading) {

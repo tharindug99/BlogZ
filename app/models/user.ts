@@ -20,7 +20,7 @@ interface Company {
 }
 
 export interface User extends Document {
-  _id: number;
+  id: number;
   name: string;
   username: string;
   password: string;
@@ -29,7 +29,7 @@ export interface User extends Document {
   phone: string;
   website: string;
   company: Company;
-  posts: mongoose.Types.ObjectId[]; // Use mongoose.Types.ObjectId for posts
+  posts: mongoose.Types.ObjectId[];
 }
 
 const geoSchema = new Schema<Geo>({
@@ -52,7 +52,7 @@ const companySchema = new Schema<Company>({
 });
 
 const userSchema = new Schema<User>({
-  _id: { type: Number, unique: true },
+  id: { type: Number, unique: true },
   name: { type: String },
   username: { type: String, unique: true },
   password: { type: String, required: true },

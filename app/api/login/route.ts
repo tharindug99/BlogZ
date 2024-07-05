@@ -7,13 +7,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     await DatabaseConnection();
     console.log("MongoDB connected successfully!");
 
-    // Extract login credentials from request body
     const { email, password } = await req.json();
 
-    // Find user by email
     const user = await UserModel.findOne({ email });
 
-    // If user not found, return error
     if (!user) {
       return NextResponse.json(
         { message: "Invalid email or password" },
@@ -21,7 +18,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    // Check if password matches (for simplicity, assuming plain text comparison)
     if (password !== user.password) {
       return NextResponse.json(
         { message: "Invalid email or password" },
@@ -29,7 +25,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    // If credentials are correct, return success message
     return NextResponse.json(
       { message: "Login successful", user },
       { status: 200 }

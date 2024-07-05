@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { type } from "os";
 
 interface Geo {
   lat: string;

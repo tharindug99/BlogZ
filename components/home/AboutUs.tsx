@@ -6,7 +6,7 @@ import backgroundImg from "../../app/public/images/aboutBg.jpeg"; // Adjust the 
 
 function AboutUs() {
   return (
-    <div className="relative lg:px-36 gap-6 flex flex-col md:flex-row items-center justify-around p-6 h-screen bg-black bg-opacity-20 -z-10">
+    <div className="relative lg:px-36 gap-6 flex flex-col md:flex-row items-center justify-around p-6 h-screen">
       <div className="absolute inset-0 -z-10">
         <Image
           src={backgroundImg}
@@ -14,7 +14,7 @@ function AboutUs() {
           layout="fill"
           objectFit="cover"
           quality={100}
-          className="pointer-events-none -z-10"
+          className="pointer-events-none -z-10 rounded-3xl"
           style={{
             backgroundRepeat: "repeat",
           }}

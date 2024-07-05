@@ -1,17 +1,18 @@
 import React from "react";
 import Image from "next/image";
 import backgroundImg from "../../app/public/images/bg.jpg";
+import blob1 from "../../app/public/blobs/blob1.svg";
 
 function Landing() {
   return (
-    <div className="flex flex-col md:flex-row items-center p-6 z-0 w-full h-screen">
+    <div className="flex flex-col md:flex-row items-center px-6 z-0 w-full ">
       <Image
         src={backgroundImg}
         alt="Background"
         layout="fill"
         objectFit="cover"
         quality={100}
-        className="pointer-events-none -z-10"
+        className="pointer-events-none -z-10 rounded-3xl"
         style={{
           backgroundRepeat: "repeat",
           backgroundImage: `url(${backgroundImg.src})`,

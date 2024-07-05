@@ -33,7 +33,7 @@ const sampleNews = [
 
 function LatestNews() {
   return (
-    <div className="flex flex-col items-center justify-center p-6">
+    <div className="flex flex-col items-center justify-center p-6 mt-52">
       <h1 className="text-6xl font-bold mb-20">Latest News</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sampleNews.map((news) => (

@@ -13,7 +13,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-white px-4 py-2 shadow-lg fixed w-full mb-20">
+    <header className="bg-white px-4 py-2 shadow-lg fixed w-full mb-20 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-black text-xl">
           <Link href="/">
@@ -58,12 +58,12 @@ function Header() {
               <Link href="/users">Users</Link>
             </li>
             <li className="text-black hover:text-gray-300">
-              <Link href="/users">
+              <Link href="/register">
                 <Button>Register</Button>
               </Link>
             </li>
             <li className="text-black hover:text-gray-300">
-              <Link href="/users">
+              <Link href="/login">
                 <Button variant="outline">Login</Button>
               </Link>
             </li>

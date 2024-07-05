@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const URL = process.env.NEXT_PUBLIC_MONGODB_URI;
+const URL = process.env.NEXT_PUBLIC_MONGODB_URI as string;
 
 const DatabaseConnection = async () => {
   try {

@@ -20,7 +20,7 @@ interface Company {
 }
 
 export interface User extends Document {
-  id: number;
+  _id: number;
   name: string;
   username: string;
   password: string;
@@ -52,7 +52,7 @@ const companySchema = new Schema<Company>({
 });
 
 const userSchema = new Schema<User>({
-  id: { type: Number, unique: true },
+  _id: { type: Number, unique: true },
   name: { type: String },
   username: { type: String, unique: true },
   password: { type: String, required: true },

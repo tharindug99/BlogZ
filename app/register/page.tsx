@@ -1,5 +1,6 @@
 "use client";
 
+import useRegister from "@/hooks/users/useRegister";
 import Image from "next/image";
 import React from "react";
 import { z } from "zod";
@@ -18,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// Define the form schema using Zod
 const formSchema = z.object({
   email: z.string().email({
     message: "Invalid email format.",
@@ -29,7 +29,8 @@ const formSchema = z.object({
 });
 
 function Register() {
-  // Initialize useForm hook with form schema and default values
+  const { loading, error, handleSubmit } = useRegister();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,10 +40,14 @@ function Register() {
   });
 
   // Function to handle form submission
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // Handle form submission logic here, e.g., API calls
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const result = await handleSubmit(values.email, values.password);
+    if (result.success) {
+      console.log("Registration successful", result.user);
+    } else {
+      console.error("Registration failed", result.error);
+    }
+  };
 
   // Function for handling Google OAuth sign-in
   function handleGoogleAuth() {

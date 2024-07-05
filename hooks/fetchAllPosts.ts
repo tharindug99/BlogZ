@@ -1,47 +1,33 @@
-import { useState, useEffect } from 'react';
-import { posts } from '../lib/data';
+import { useState, useEffect } from "react";
+import { Post } from "@/app/models/post"; // Adjust the import path as needed
 
-interface Post {
-  id: string;
-  title: string;
-  content: string;
-  created_at: string;
-  userId: string;
-  updated_at: string;
-}
-
-const useFetchPosts = (userId?: number) => {
-  const [posts, setPosts] = useState<Post[]>([]);
+function useFetchPosts(userId: number | undefined) {
+  const [data, setData] = useState<{ message: string; posts: Post[] } | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    async function fetchPosts() {
       try {
-        setLoading(true);
-
-        const response = await fetch(`http://localhost:3000/api/posts`);
-        
+        const response = await fetch(`/api/posts?userId=${userId}`);
         if (!response.ok) {
-          throw new Error(`Failed to fetch posts: ${response.statusText}`);
+          throw new Error("Failed to fetch posts");
         }
-
-        const data: Post[] = await response.json();
-        
-        console.log(data);
-        
-        setPosts(data);
-        setLoading(false);
-      } catch (err:any) {
-        setError(err.message || 'Failed to fetch posts');
+        const result = await response.json();
+        setData(result);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchPosts();
   }, [userId]);
 
-  return { posts, loading, error };
-};
+  return { data, loading, error };
+}
 
 export default useFetchPosts;

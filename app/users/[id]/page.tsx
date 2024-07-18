@@ -1,10 +1,10 @@
 // User.tsx (Server Component)
-import UserDetail from '@/components/User';
+import UserDetail from "@/components/user/User";
 
 function User() {
   return (
     <div>
-      <UserDetail/>
+      <UserDetail />
     </div>
   );
 }

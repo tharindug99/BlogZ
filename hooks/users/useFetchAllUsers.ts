@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 interface User {
+    _id: any;
     id: number;
     name: string;
     email: string;
@@ -12,7 +13,7 @@ interface UseFetchUsersResult {
     error: string | null;
 }
 
-const useFetchUsers = (): UseFetchUsersResult => {
+const useFetchAllUsers = (): UseFetchUsersResult => {
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -39,4 +40,4 @@ const useFetchUsers = (): UseFetchUsersResult => {
     return { users, loading, error };
 };
 
-export default useFetchUsers;
+export default useFetchAllUsers;

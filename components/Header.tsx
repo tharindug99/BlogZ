@@ -1,9 +1,9 @@
-"use client"
-
-import Link from 'next/link';
-import React, { useState } from 'react';
-import Logo from '../app/public/logo.png'
-import Image from 'next/image';
+"use client";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import React, { useState } from "react";
+import Logo from "../app/public/logo.png";
+import Image from "next/image";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,11 +13,11 @@ function Header() {
   };
 
   return (
-    <header className="bg-white p-4 shadow-lg fixed w-full mb-20">
+    <header className="bg-white px-4 py-2 shadow-lg fixed w-full mb-20 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-black text-xl">
           <Link href="/">
-            <Image src={Logo} className='h-10 w-12' alt='logo'/>
+            <Image src={Logo} className="h-30 w-40" alt="logo" />
           </Link>
         </div>
         <div className="md:hidden">
@@ -44,18 +44,28 @@ function Header() {
         </div>
         <nav
           className={`${
-            isOpen ? 'block' : 'hidden'
+            isOpen ? "block" : "hidden"
           } md:flex md:items-center w-full md:w-auto`}
         >
           <ul className="flex flex-col md:flex-row md:space-x-6">
-            <li className="text-black hover:text-gray-300">
+            <li className="text-black hover:text-gray-300 mt-2">
               <Link href="/">Home</Link>
             </li>
-            <li className="text-black hover:text-gray-300">
+            <li className="text-black hover:text-gray-300 mt-2">
               <Link href="/blogs">Blogs</Link>
             </li>
-            <li className="text-black hover:text-gray-300">
+            <li className="text-black hover:text-gray-300 mt-2">
               <Link href="/users">Users</Link>
+            </li>
+            <li className="text-black hover:text-gray-300">
+              <Link href="/register">
+                <Button>Register</Button>
+              </Link>
+            </li>
+            <li className="text-black hover:text-gray-300">
+              <Link href="/login">
+                <Button variant="outline">Login</Button>
+              </Link>
             </li>
           </ul>
         </nav>

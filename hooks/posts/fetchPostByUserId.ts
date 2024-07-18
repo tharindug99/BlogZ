@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface Post {
+  image: string | undefined;
   userId: number;
   id: number;
   title: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import useFetchUserPosts from "@/hooks/fetchUserPosts";
+import useFetchUserPosts from "@/hooks/posts/fetchPostByUserId";
 import useFetchUser from "@/hooks/users/usefetchUser";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";

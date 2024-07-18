@@ -3,9 +3,9 @@ import React from "react";
 import { useParams } from "next/navigation";
 import useFetchUser from "@/hooks/users/usefetchUser";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 function UserDetail() {
   const params = useParams();

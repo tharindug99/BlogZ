@@ -4,8 +4,7 @@ import React from "react";
 import useFetchAllUsers from "@/hooks/users/useFetchAllUsers";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Loading from "./Loading";
-
+import Loading from "../Loading";
 
 function UserList() {
   const { users, loading, error } = useFetchAllUsers();

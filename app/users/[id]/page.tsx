@@ -1,4 +1,3 @@
-// User.tsx (Server Component)
 import UserDetail from "@/components/user/User";
 
 function User() {

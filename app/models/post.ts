@@ -6,7 +6,7 @@ const BADGES = ["dogs", "cats", "fish", "birds", "hamsters", "all"] as const;
 type BadgeType = (typeof BADGES)[number];
 
 export interface Post extends Document {
-  _id: string;
+  id: string;
   title: string;
   content: string;
   author: ObjectId;
@@ -17,7 +17,7 @@ export interface Post extends Document {
 }
 
 const postSchema = new Schema<Post>({
-  _id: { type: String, required: true, unique: true },
+  id: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
   author: { type: Schema.Types.ObjectId, ref: "User", required: true },

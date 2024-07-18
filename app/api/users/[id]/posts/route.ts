@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import DatabaseConnection from "@/lib/mongo/db";
 import PostsModel from "@/app/models/post";
+import mongoose from "mongoose";
+import UserModel from "@/app/models/user";
 
 export async function GET(req: NextRequest) {
   try {
@@ -8,10 +10,10 @@ export async function GET(req: NextRequest) {
     const userIdIndex = segments.indexOf("users") + 1;
     const userId =
       userIdIndex >= 0 && userIdIndex < segments.length
-        ? parseInt(segments[userIdIndex])
+        ? segments[userIdIndex]
         : null;
 
-    if (!userId || isNaN(userId)) {
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
       throw new Error("Invalid userId in URL path");
     }
 
@@ -20,13 +22,12 @@ export async function GET(req: NextRequest) {
     console.log("Connected to MongoDB");
 
     // Fetch posts from the database
-    const posts = await PostsModel.find({ userId });
+
+    const user = await UserModel.findById(userId);
+    const posts = await PostsModel.findById(user.posts);
     console.log(`Posts found for userId ${userId}:`, posts);
 
-    return NextResponse.json(
-      { message: "GET request received", posts },
-      { status: 200 }
-    );
+    return NextResponse.json({ posts }, { status: 200 });
   } catch (error: any) {
     console.error("Error handling GET request:", error);
     return NextResponse.json(

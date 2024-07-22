@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 interface Post {
   image: string | undefined;
   userId: number;
-  id: number;
+  _id: number;
   title: string;
   body: string;
 }
@@ -14,20 +14,20 @@ interface UseFetchUserPostsResult {
   error: string | null;
 }
 
-const useFetchUserPosts = (id: number | null): UseFetchUserPostsResult => {
+const useFetchUserPosts = (_id: number | null): UseFetchUserPostsResult => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      if (!id) {
+      if (!_id) {
         setLoading(false);
         return;
       }
 
       try {
-        const response = await fetch(`/api/users/${id}/posts/${id}`);
+        const response = await fetch(`/api/users/${_id}/posts/${_id}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch user posts: ${response.statusText}`);
         }
@@ -42,7 +42,7 @@ const useFetchUserPosts = (id: number | null): UseFetchUserPostsResult => {
     };
 
     fetchUserPosts();
-  }, [id]);
+  }, [_id]);
 
   return { posts, loading, error };
 };

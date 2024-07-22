@@ -6,7 +6,6 @@ const BADGES = ["dogs", "cats", "fish", "birds", "hamsters", "all"] as const;
 type BadgeType = (typeof BADGES)[number];
 
 export interface Post extends Document {
-  id: string;
   title: string;
   content: string;
   author: ObjectId;
@@ -17,7 +16,6 @@ export interface Post extends Document {
 }
 
 const postSchema = new Schema<Post>({
-  id: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
   author: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -26,7 +24,6 @@ const postSchema = new Schema<Post>({
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
-
 const PostModel =
   mongoose.models.Post || mongoose.model<Post>("Post", postSchema);
 

@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
 
 interface Post {
-  userId: number;
-  id: number;
+  userId: any;
+  _id: string; // MongoDB's default `_id` field
+  userID: string;
   title: string;
-  body: string;
-  image: string;
   content: string;
+  author: string; // Or ObjectId if you use it in your schema
+  badges: string[]; // Array of badge types
+  image: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface User {
-  id: string;
+  _id: string;
   name: string;
 }
 
@@ -21,34 +25,34 @@ interface UseFetchUserPostResult {
   error: string | null;
 }
 
-const useFetchUserPost = (id: number | null): UseFetchUserPostResult => {
-  const [post, setPost] = useState<Post | null>(null); // Initialize with null
+const useFetchUserPost = (_id: string | null): UseFetchUserPostResult => {
+  const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserPost = async () => {
-      if (!id) {
+      if (!_id) {
         setLoading(false);
+        setError("Invalid post ID.");
         return;
       }
 
       try {
-        const response = await fetch(`/api/posts/${id}`);
+        const response = await fetch(`/api/posts/${_id}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch post: ${response.statusText}`);
         }
-        const data = await response.json();
+        const data: Post = await response.json();
         setPost(data);
 
         // Fetch user
-        const userResponse = await fetch(`/api/users/${data.userId}`);
-        console.log(userResponse);
+        const userResponse = await fetch(`/api/users/${data.author}`);
         if (!userResponse.ok) {
           throw new Error(`Failed to fetch user: ${userResponse.statusText}`);
         }
-        const userData = await userResponse.json();
+        const userData: User = await userResponse.json();
         setUser(userData);
       } catch (error: any) {
         setError(error.message);
@@ -58,12 +62,9 @@ const useFetchUserPost = (id: number | null): UseFetchUserPostResult => {
     };
 
     fetchUserPost();
-  }, [id]);
+  }, [_id]);
 
-  return { post, user, loading, error }; // Return post instead of posts
+  return { post, user, loading, error };
 };
 
 export default useFetchUserPost;
-function setUser(userData: any) {
-  throw new Error("Function not implemented.");
-}

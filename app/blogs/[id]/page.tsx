@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 const BlogScreen = () => {
   const params = useParams();
-  const postId = params.id as unknown as number | null;
+  const postId = params.id as unknown as string | null;
   const { post, user, loading, error } = useFetchUserPost(postId);
 
   if (loading) {
@@ -47,7 +47,7 @@ const BlogScreen = () => {
             <div className="text-sm text-gray-600">
               By <span className="font-semibold">{user?.name}</span>
             </div>
-            <div className="text-sm text-gray-600">{post.id}</div>
+            <div className="text-sm text-gray-600">{post._id}</div>
           </div>
           <h2 className="text-5xl font-bold mb-4 text-center">{post.title}</h2>
           <p className="text-gray-700 text-xl text-center">{post.content}</p>

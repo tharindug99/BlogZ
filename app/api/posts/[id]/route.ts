@@ -28,7 +28,7 @@ export async function GET(req: Request) {
 
     // Find the post by ID
     const post = await PostModel.findById(id).lean();
-    console.log("Retrieved post for ID: " + id);
+    console.log("Retrieved post for ID:", id);
 
     // Check if the post was found and return the appropriate response
     if (post) {
@@ -36,7 +36,10 @@ export async function GET(req: Request) {
       return NextResponse.json(post);
     } else {
       console.log("Post not found for ID:", id);
-      return NextResponse.json({ message: "Post not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: `Post not found for ID: ${id}` },
+        { status: 404 }
+      );
     }
   } catch (error: any) {
     console.warn("Error connecting DB", error);

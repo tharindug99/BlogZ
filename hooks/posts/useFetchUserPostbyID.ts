@@ -54,6 +54,7 @@ const useFetchUserPost = (_id: string | null): UseFetchUserPostResult => {
         }
         const userData: User = await userResponse.json();
         setUser(userData);
+        console.log(userData);
       } catch (error: any) {
         setError(error.message);
       } finally {

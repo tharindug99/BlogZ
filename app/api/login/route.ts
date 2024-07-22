@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import DatabaseConnection from "@/lib/mongo/db";
 import UserModel from "@/app/models/user";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   try {
     await DatabaseConnection();
     console.log("MongoDB connected successfully!");
@@ -13,14 +13,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (!user) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "User not registered" },
         { status: 401 }
       );
     }
 
     if (password !== user.password) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "Incorrect password" },
         { status: 401 }
       );
     }
@@ -29,10 +29,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
       { message: "Login successful", user },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error during login:", error);
     return NextResponse.json(
-      { message: "Failed to login", error },
+      { message: "Failed to login", error: error.message },
       { status: 500 }
     );
   }

@@ -41,7 +41,7 @@ const UserList: React.FC<UserListProps> = ({ userId }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {posts.map((post: Post) => (
           <div
-            key={post._id} // Use _id for the unique key
+            key={post._id as string} // Convert _id to string to ensure type compatibility
             className="bg-white shadow-md rounded-lg p-4 flex flex-col"
           >
             <div className="w-full rounded-lg">

@@ -20,12 +20,11 @@ function useLogin() {
         body: JSON.stringify(userData),
       });
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
       const data = await response.json();
-      console.log("data", data);
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to login");
+      }
 
       setLoading(false);
       return { success: true, user: data.user };

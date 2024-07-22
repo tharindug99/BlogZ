@@ -1,14 +1,14 @@
-"use client";
-
 import { useState } from "react";
 
 function useLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [user, setUser] = useState<any | null>(null);
 
   const handleSubmit = async (email: string, password: string) => {
     setLoading(true);
     setError(null);
+    setUser(null);
 
     try {
       const userData = { email, password };
@@ -27,6 +27,7 @@ function useLogin() {
       }
 
       setLoading(false);
+      setUser(data.user);
       return { success: true, user: data.user };
     } catch (error: any) {
       setError(error.message || "Failed to login");
@@ -38,6 +39,7 @@ function useLogin() {
   return {
     loading,
     error,
+    user,
     handleSubmit,
   };
 }
